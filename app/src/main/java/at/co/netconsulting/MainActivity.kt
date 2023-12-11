@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private var redFiguresOnBoard: ArrayList<Figure> = arrayListOf()
     private var blueFiguresOnBoard: ArrayList<Figure> = arrayListOf()
     private var gameBoard = Array(10) {Array(10) {0} }
+    private var isGamePlayable: Boolean = true
+    private var isRedTurn: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,16 @@ class MainActivity : AppCompatActivity() {
         initalizePieces()
         //setup game board with figures randomly placed
         setupGameBoard()
+        //print gameboard to Log.d
+        printGameBoard()
+
+        while(isGamePlayable) {
+            generateMove(isRedTurn)
+        }
+    }
+
+    private fun generateMove(isRedTurn: Boolean) {
+        this.isRedTurn = !isRedTurn
     }
 
     private fun setupGameBoard() {
@@ -60,12 +72,20 @@ class MainActivity : AppCompatActivity() {
 
         placeFiguresOnGameBoard(StaticFields.RED)
         placeFiguresOnGameBoard(StaticFields.BLUE)
-
-        printGameBoard()
     }
 
     private fun printGameBoard() {
         var mString:String? = ""
+
+        gameBoard[4][2] = 999
+        gameBoard[4][3] = 999
+        gameBoard[4][6] = 999
+        gameBoard[4][7] = 999
+
+        gameBoard[5][2] = 999
+        gameBoard[5][3] = 999
+        gameBoard[5][6] = 999
+        gameBoard[5][7] = 999
 
         for(i in 0..9) {
             for(j in 0..9) {
@@ -105,107 +125,107 @@ class MainActivity : AppCompatActivity() {
         //red pieces
         redFiguresOnBoard.add(Flag(StaticFields.RED, 100, 1))
 
-        redFiguresOnBoard.add(Bomb(StaticFields.RED, 11, 1))
-        redFiguresOnBoard.add(Bomb(StaticFields.RED, 11, 2))
-        redFiguresOnBoard.add(Bomb(StaticFields.RED, 11, 3))
-        redFiguresOnBoard.add(Bomb(StaticFields.RED, 11, 4))
-        redFiguresOnBoard.add(Bomb(StaticFields.RED, 11, 5))
-        redFiguresOnBoard.add(Bomb(StaticFields.RED, 11, 6))
+        redFiguresOnBoard.add(Bomb(StaticFields.RED, 111, 1))
+        redFiguresOnBoard.add(Bomb(StaticFields.RED, 111, 2))
+        redFiguresOnBoard.add(Bomb(StaticFields.RED, 111, 3))
+        redFiguresOnBoard.add(Bomb(StaticFields.RED, 111, 4))
+        redFiguresOnBoard.add(Bomb(StaticFields.RED, 111, 5))
+        redFiguresOnBoard.add(Bomb(StaticFields.RED, 111, 6))
 
-        redFiguresOnBoard.add(Marshal(StaticFields.RED, 10, 1))
+        redFiguresOnBoard.add(Marshal(StaticFields.RED, 101, 1))
 
-        redFiguresOnBoard.add(General(StaticFields.RED, 9, 1))
+        redFiguresOnBoard.add(General(StaticFields.RED, 91, 1))
 
-        redFiguresOnBoard.add(Colonel(StaticFields.RED, 8, 1))
-        redFiguresOnBoard.add(Colonel(StaticFields.RED, 8, 2))
+        redFiguresOnBoard.add(Colonel(StaticFields.RED, 81, 1))
+        redFiguresOnBoard.add(Colonel(StaticFields.RED, 81, 2))
 
-        redFiguresOnBoard.add(Major(StaticFields.RED, 7, 1))
-        redFiguresOnBoard.add(Major(StaticFields.RED, 7, 2))
-        redFiguresOnBoard.add(Major(StaticFields.RED, 7, 3))
+        redFiguresOnBoard.add(Major(StaticFields.RED, 71, 1))
+        redFiguresOnBoard.add(Major(StaticFields.RED, 71, 2))
+        redFiguresOnBoard.add(Major(StaticFields.RED, 71, 3))
 
-        redFiguresOnBoard.add(Captain(StaticFields.RED, 6, 1))
-        redFiguresOnBoard.add(Captain(StaticFields.RED, 6, 2))
-        redFiguresOnBoard.add(Captain(StaticFields.RED, 6, 3))
-        redFiguresOnBoard.add(Captain(StaticFields.RED, 6, 4))
+        redFiguresOnBoard.add(Captain(StaticFields.RED, 61, 1))
+        redFiguresOnBoard.add(Captain(StaticFields.RED, 61, 2))
+        redFiguresOnBoard.add(Captain(StaticFields.RED, 61, 3))
+        redFiguresOnBoard.add(Captain(StaticFields.RED, 61, 4))
 
-        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 5, 1))
-        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 5, 2))
-        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 5, 3))
-        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 5, 4))
+        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 51, 1))
+        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 51, 2))
+        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 51, 3))
+        redFiguresOnBoard.add(Lieutenant(StaticFields.RED, 51, 4))
 
-        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 4, 1))
-        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 4, 2))
-        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 4, 3))
-        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 4, 4))
+        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 41, 1))
+        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 41, 2))
+        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 41, 3))
+        redFiguresOnBoard.add(Sergeant(StaticFields.RED, 41, 4))
 
-        redFiguresOnBoard.add(Minor(StaticFields.RED, 3, 1))
-        redFiguresOnBoard.add(Minor(StaticFields.RED, 3, 2))
-        redFiguresOnBoard.add(Minor(StaticFields.RED, 3, 3))
-        redFiguresOnBoard.add(Minor(StaticFields.RED, 3, 4))
-        redFiguresOnBoard.add(Minor(StaticFields.RED, 3, 5))
+        redFiguresOnBoard.add(Minor(StaticFields.RED, 31, 1))
+        redFiguresOnBoard.add(Minor(StaticFields.RED, 31, 2))
+        redFiguresOnBoard.add(Minor(StaticFields.RED, 31, 3))
+        redFiguresOnBoard.add(Minor(StaticFields.RED, 31, 4))
+        redFiguresOnBoard.add(Minor(StaticFields.RED, 31, 5))
 
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 1))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 2))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 3))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 4))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 5))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 6))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 7))
-        redFiguresOnBoard.add(Scout(StaticFields.RED, 2, 8))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 1))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 2))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 3))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 4))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 5))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 6))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 7))
+        redFiguresOnBoard.add(Scout(StaticFields.RED, 21, 8))
 
-        redFiguresOnBoard.add(Spy(StaticFields.RED, 1, 1))
+        redFiguresOnBoard.add(Spy(StaticFields.RED, 11, 1))
 
         //blue pieces
-        blueFiguresOnBoard.add(Flag(StaticFields.BLUE, 100, 1))
+        blueFiguresOnBoard.add(Flag(StaticFields.BLUE, 1000, 1))
 
-        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 11, 1))
-        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 11, 2))
-        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 11, 3))
-        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 11, 4))
-        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 11, 5))
-        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 11, 6))
+        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 110, 1))
+        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 110, 2))
+        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 110, 3))
+        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 110, 4))
+        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 110, 5))
+        blueFiguresOnBoard.add(Bomb(StaticFields.BLUE, 110, 6))
 
-        blueFiguresOnBoard.add(Marshal(StaticFields.BLUE, 10, 1))
+        blueFiguresOnBoard.add(Marshal(StaticFields.BLUE, 100, 1))
 
-        blueFiguresOnBoard.add(General(StaticFields.BLUE, 9, 1))
+        blueFiguresOnBoard.add(General(StaticFields.BLUE, 90, 1))
 
-        blueFiguresOnBoard.add(Colonel(StaticFields.BLUE, 8, 1))
-        blueFiguresOnBoard.add(Colonel(StaticFields.BLUE, 8, 2))
+        blueFiguresOnBoard.add(Colonel(StaticFields.BLUE, 80, 1))
+        blueFiguresOnBoard.add(Colonel(StaticFields.BLUE, 80, 2))
 
-        blueFiguresOnBoard.add(Major(StaticFields.BLUE, 7, 1))
-        blueFiguresOnBoard.add(Major(StaticFields.BLUE, 7, 2))
-        blueFiguresOnBoard.add(Major(StaticFields.BLUE, 7, 3))
+        blueFiguresOnBoard.add(Major(StaticFields.BLUE, 70, 1))
+        blueFiguresOnBoard.add(Major(StaticFields.BLUE, 70, 2))
+        blueFiguresOnBoard.add(Major(StaticFields.BLUE, 70, 3))
 
-        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 6, 1))
-        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 6, 2))
-        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 6, 3))
-        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 6, 4))
+        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 60, 1))
+        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 60, 2))
+        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 60, 3))
+        blueFiguresOnBoard.add(Captain(StaticFields.BLUE, 60, 4))
 
-        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 5, 1))
-        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 5, 2))
-        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 5, 3))
-        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 5, 4))
+        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 50, 1))
+        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 50, 2))
+        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 50, 3))
+        blueFiguresOnBoard.add(Lieutenant(StaticFields.BLUE, 50, 4))
 
-        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 4, 1))
-        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 4, 2))
-        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 4, 3))
-        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 4, 4))
+        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 40, 1))
+        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 40, 2))
+        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 40, 3))
+        blueFiguresOnBoard.add(Sergeant(StaticFields.BLUE, 40, 4))
 
-        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 3, 1))
-        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 3, 2))
-        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 3, 3))
-        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 3, 4))
-        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 3, 5))
+        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 30, 1))
+        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 30, 2))
+        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 30, 3))
+        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 30, 4))
+        blueFiguresOnBoard.add(Minor(StaticFields.BLUE, 30, 5))
 
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 1))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 2))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 3))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 4))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 5))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 6))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 7))
-        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 2, 8))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 1))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 2))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 3))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 4))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 5))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 6))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 7))
+        blueFiguresOnBoard.add(Scout(StaticFields.BLUE, 20, 8))
 
-        blueFiguresOnBoard.add(Spy(StaticFields.BLUE, 1, 1))
+        blueFiguresOnBoard.add(Spy(StaticFields.BLUE, 10, 1))
     }
 }
